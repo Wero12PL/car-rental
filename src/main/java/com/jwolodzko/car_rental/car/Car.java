@@ -1,5 +1,6 @@
 package com.jwolodzko.car_rental.car;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +10,10 @@ import lombok.Setter;
 @Setter
 @Table(name = "car")
 public class Car {
-    //with a lot of INSERT requests to DB this might be a bottlenect, as we must wait for DB to assign ID
+    //with a lot of INSERT requests to DB this might be a bottleneck, as we must wait for DB to assign ID
     //UUID.randomUUID() might be better with scale
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
