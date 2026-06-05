@@ -1,8 +1,12 @@
 package com.jwolodzko.car_rental.location;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jwolodzko.car_rental.car.Car;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity()
 @Getter
@@ -16,8 +20,13 @@ public class Location {
     @Column(nullable = false)
     String name;
 
+    @Column(nullable = false)
     String city;
 
     @Column(nullable = false)
     String country;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "location")
+    Set<Car> cars;
 }

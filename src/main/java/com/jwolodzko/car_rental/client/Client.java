@@ -37,4 +37,10 @@ public class Client {
     String phoneNumber;
 
     String company;
+
+    @OneToMany(mappedBy = "client")
+    Set<DraftRental> draftRentals;
+
+    @OneToMany(mappedBy = "client")
+    Set<Rental> rentals;
 }

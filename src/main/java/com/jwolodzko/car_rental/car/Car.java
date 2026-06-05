@@ -1,6 +1,7 @@
 package com.jwolodzko.car_rental.car;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jwolodzko.car_rental.location.Location;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,10 @@ public class Car {
     @Column(nullable = false)
     Integer price;
 
+    @ManyToOne
+    Location location;
+
+    @Column(nullable = false)
     Integer quantity;
 
     Integer seats;
