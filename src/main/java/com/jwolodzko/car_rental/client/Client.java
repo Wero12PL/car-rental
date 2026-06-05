@@ -1,13 +1,14 @@
 package com.jwolodzko.car_rental.client;
 
-import com.jwolodzko.car_rental.rental.Rental;
+import com.jwolodzko.car_rental.rental.draft_rental.DraftRental;
+import com.jwolodzko.car_rental.rental.rental.Rental;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,7 +17,7 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @Column(nullable = false)
     String name;
@@ -32,9 +33,6 @@ public class Client {
 
     @Column(nullable = false)
     String email;
-
-    @OneToMany
-    List<Rental> rentals;
 
     String phoneNumber;
 

@@ -1,19 +1,18 @@
-package com.jwolodzko.car_rental.rental;
+package com.jwolodzko.car_rental.rental.rental;
 
 import com.jwolodzko.car_rental.car.Car;
 import com.jwolodzko.car_rental.client.Client;
 import com.jwolodzko.car_rental.payment.PaymentStatus;
+import com.jwolodzko.car_rental.rental.AbstractRental;
 import jakarta.persistence.*;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "rental")
-public class Rental extends AbstractRental{
+public class Rental extends AbstractRental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;

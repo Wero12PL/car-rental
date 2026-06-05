@@ -1,4 +1,4 @@
-package com.jwolodzko.car_rental.rental;
+package com.jwolodzko.car_rental.rental.rental;
 
 import org.springframework.stereotype.Service;
 

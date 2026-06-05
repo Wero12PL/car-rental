@@ -15,7 +15,7 @@ public class Car {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @Column(nullable = false)
     String brand;
@@ -30,6 +30,8 @@ public class Car {
 
     @Column(nullable = false)
     Integer price;
+
+    Integer quantity;
 
     Integer seats;
 

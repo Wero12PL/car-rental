@@ -1,10 +1,10 @@
-package com.jwolodzko.car_rental.rental;
+package com.jwolodzko.car_rental.rental.draft_rental;
 
 import com.jwolodzko.car_rental.car.Car;
 import com.jwolodzko.car_rental.client.Client;
 import com.jwolodzko.car_rental.payment.PaymentStatus;
+import com.jwolodzko.car_rental.rental.AbstractRental;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDate;
