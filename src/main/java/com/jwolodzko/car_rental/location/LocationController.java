@@ -2,6 +2,7 @@ package com.jwolodzko.car_rental.location;
 
 import com.jwolodzko.car_rental.location.dto.LocationRequest;
 import com.jwolodzko.car_rental.location.dto.LocationResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class LocationController {
     }
 
     @PostMapping
-    public void createLocation(@RequestBody LocationRequest locationRequest) {
+    public void createLocation(@Valid @RequestBody LocationRequest locationRequest) {
         locationService.createLocation(locationRequest);
     }
 

@@ -2,6 +2,7 @@ package com.jwolodzko.car_rental.client;
 
 import com.jwolodzko.car_rental.client.dto.ClientRequest;
 import com.jwolodzko.car_rental.client.dto.ClientResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public void createClient(@RequestBody ClientRequest clientRequest) {
+    public void createClient(@Valid @RequestBody ClientRequest clientRequest) {
         clientService.createClient(clientRequest);
     }
 

@@ -20,10 +20,12 @@ public abstract class AbstractRental {
     @Column(nullable = false)
     private LocalDate toDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
     private Car car;
 
     @Enumerated(EnumType.STRING)

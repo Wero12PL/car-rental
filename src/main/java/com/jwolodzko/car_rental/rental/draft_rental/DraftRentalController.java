@@ -2,6 +2,7 @@ package com.jwolodzko.car_rental.rental.draft_rental;
 
 import com.jwolodzko.car_rental.rental.draft_rental.dto.DraftRentalRequest;
 import com.jwolodzko.car_rental.rental.draft_rental.dto.DraftRentalResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class DraftRentalController {
     }
 
     @PostMapping
-    public void createDraftRental(@RequestBody DraftRentalRequest draftRentalRequest) {
+    public void createDraftRental(@Valid @RequestBody DraftRentalRequest draftRentalRequest) {
         draftRentalService.createDraftRental(draftRentalRequest);
     }
 

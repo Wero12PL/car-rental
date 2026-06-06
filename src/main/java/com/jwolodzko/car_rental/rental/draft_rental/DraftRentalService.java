@@ -30,6 +30,10 @@ public class DraftRentalService {
         Client client = clientRepository.findById(draftRentalRequest.clientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + draftRentalRequest.clientId()));
 
+        if (!draftRentalRequest.toDate().isAfter(draftRentalRequest.fromDate())) {
+            throw new IllegalArgumentException("toDate must be after fromDate");
+        }
+
         DraftRental draftRental = new DraftRental(draftRentalRequest.fromDate(),
                 draftRentalRequest.toDate(),
                 client,

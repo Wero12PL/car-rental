@@ -2,6 +2,7 @@ package com.jwolodzko.car_rental.car;
 
 import com.jwolodzko.car_rental.car.dto.CarRequest;
 import com.jwolodzko.car_rental.car.dto.CarResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class CarController {
     }
 
     @PostMapping
-    public void createCar(@RequestBody CarRequest carRequest) {
+    public void createCar(@Valid @RequestBody CarRequest carRequest) {
         carService.createCar(carRequest);
     }
 }
