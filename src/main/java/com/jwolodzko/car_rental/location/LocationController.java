@@ -1,5 +1,7 @@
 package com.jwolodzko.car_rental.location;
 
+import com.jwolodzko.car_rental.location.dto.LocationRequest;
+import com.jwolodzko.car_rental.location.dto.LocationResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,19 +10,21 @@ import java.util.List;
 @RequestMapping("/locations")
 public class LocationController {
 
+    private final LocationService locationService;
     private final LocationRepository locationRepository;
 
-    public LocationController(LocationRepository locationRepository){
+    public LocationController(LocationService locationService, LocationRepository locationRepository) {
+        this.locationService = locationService;
         this.locationRepository = locationRepository;
     }
 
     @PostMapping
-    public void createLocation(@RequestBody Location location) {
-        locationRepository.save(location);
+    public void createLocation(@RequestBody LocationRequest locationRequest) {
+        locationService.createLocation(locationRequest);
     }
 
     @GetMapping
-    public List<Location> getLocations() {
-        return locationRepository.findAll();
+    public List<LocationResponse> getLocations() {
+        return locationRepository.findAll().stream().map(LocationResponse::new).toList();
     }
 }

@@ -1,5 +1,7 @@
 package com.jwolodzko.car_rental.rental.draft_rental;
 
+import com.jwolodzko.car_rental.rental.draft_rental.dto.DraftRentalRequest;
+import com.jwolodzko.car_rental.rental.draft_rental.dto.DraftRentalResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,9 @@ public class DraftRentalController {
     }
 
     @GetMapping
-    public List<DraftRental> getDraftRentals() {
-        return draftRentalRepository.findAll();
+    public List<DraftRentalResponse> getDraftRentals() {
+        return draftRentalRepository.findAll().stream()
+                .map(DraftRentalResponse::new)
+                .toList();
     }
 }

@@ -1,5 +1,7 @@
 package com.jwolodzko.car_rental.car;
 
+import com.jwolodzko.car_rental.car.dto.CarRequest;
+import com.jwolodzko.car_rental.car.dto.CarResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,19 +10,21 @@ import java.util.List;
 @RequestMapping("/cars")
 public class CarController {
 
+    private final CarService carService;
     private final CarRepository carRepository;
 
-    public CarController(CarRepository carRepository) {
+    public CarController(CarService carService, CarRepository carRepository) {
+        this.carService = carService;
         this.carRepository = carRepository;
     }
 
     @GetMapping
-    public List<Car> getCars() {
-        return carRepository.findAll();
+    public List<CarResponse> getCars() {
+        return carRepository.findAll().stream().map(CarResponse::new).toList();
     }
 
     @PostMapping
-    public void createCar(@RequestBody Car car) {
-        carRepository.save(car);
+    public void createCar(@RequestBody CarRequest carRequest) {
+        carService.createCar(carRequest);
     }
 }

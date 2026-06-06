@@ -6,6 +6,7 @@ import com.jwolodzko.car_rental.client.Client;
 import com.jwolodzko.car_rental.client.ClientRepository;
 import com.jwolodzko.car_rental.exception.ResourceNotFoundException;
 import com.jwolodzko.car_rental.payment.PaymentStatus;
+import com.jwolodzko.car_rental.rental.draft_rental.dto.DraftRentalRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,13 +25,13 @@ public class DraftRentalService {
     }
 
     public void createDraftRental(DraftRentalRequest draftRentalRequest) {
-        Car car = carRepository.findById(draftRentalRequest.getCarId())
-                .orElseThrow(() -> new ResourceNotFoundException("Car not found with id: " + draftRentalRequest.getCarId()));
-        Client client = clientRepository.findById(draftRentalRequest.getClientId())
-                .orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + draftRentalRequest.getClientId()));
+        Car car = carRepository.findById(draftRentalRequest.carId())
+                .orElseThrow(() -> new ResourceNotFoundException("Car not found with id: " + draftRentalRequest.carId()));
+        Client client = clientRepository.findById(draftRentalRequest.clientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + draftRentalRequest.clientId()));
 
-        DraftRental draftRental = new DraftRental(draftRentalRequest.getFromDate(),
-                draftRentalRequest.getToDate(),
+        DraftRental draftRental = new DraftRental(draftRentalRequest.fromDate(),
+                draftRentalRequest.toDate(),
                 client,
                 car,
                 PaymentStatus.PENDING);

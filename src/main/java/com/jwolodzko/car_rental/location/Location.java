@@ -26,7 +26,6 @@ public class Location {
     @Column(nullable = false)
     String country;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "location")
     Set<Car> cars;
 }

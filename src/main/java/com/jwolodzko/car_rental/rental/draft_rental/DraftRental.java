@@ -5,12 +5,14 @@ import com.jwolodzko.car_rental.client.Client;
 import com.jwolodzko.car_rental.payment.PaymentStatus;
 import com.jwolodzko.car_rental.rental.AbstractRental;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NonNull;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Getter
 @Table(name = "draft_rental")
 public class DraftRental extends AbstractRental {
     @Id
