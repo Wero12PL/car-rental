@@ -29,4 +29,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    @ExceptionHandler(CarUnavailableException.class)
+    public ResponseEntity<Map<String, String>> handleCarUnavailable(CarUnavailableException ex) {
+        Map<String, String> error = Map.of("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
 }
