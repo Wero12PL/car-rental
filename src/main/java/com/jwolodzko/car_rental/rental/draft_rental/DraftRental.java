@@ -25,16 +25,15 @@ public class DraftRental extends AbstractRental {
     }
 
     //for business use
-    public DraftRental(@NonNull LocalDate fromDate,
-                       @NonNull LocalDate toDate,
-                       @NonNull Client client,
-                       @NonNull Car car,
-                       @NonNull PaymentStatus paymentStatus) {
+    public DraftRental(LocalDate fromDate,
+                       LocalDate toDate,
+                       Client client,
+                       Car car,
+                       PaymentStatus paymentStatus) {
         if(Objects.equals(paymentStatus, PaymentStatus.COMPLETED) ||
            Objects.equals(paymentStatus, PaymentStatus.REFUNDED)) {
             throw new IllegalArgumentException("DraftRental payment status cannot be created with status:" + paymentStatus);
         }
-
         this.setFromDate(fromDate);
         this.setToDate(toDate);
         this.setClient(client);

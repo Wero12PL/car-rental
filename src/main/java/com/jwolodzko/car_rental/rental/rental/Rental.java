@@ -1,13 +1,10 @@
 package com.jwolodzko.car_rental.rental.rental;
 
-import com.jwolodzko.car_rental.car.Car;
-import com.jwolodzko.car_rental.client.Client;
 import com.jwolodzko.car_rental.payment.PaymentStatus;
 import com.jwolodzko.car_rental.rental.AbstractRental;
+import com.jwolodzko.car_rental.rental.draft_rental.DraftRental;
 import jakarta.persistence.*;
-import lombok.NonNull;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -23,20 +20,16 @@ public class Rental extends AbstractRental {
     }
 
     //for business use
-    public Rental(@NonNull LocalDate fromDate,
-                  @NonNull LocalDate toDate,
-                  @NonNull Client client,
-                  @NonNull Car car,
-                  @NonNull PaymentStatus paymentStatus) {
-        if(!Objects.equals(paymentStatus, PaymentStatus.COMPLETED) &&
-           !Objects.equals(paymentStatus, PaymentStatus.REFUNDED)) {
-            throw new IllegalArgumentException("Rental payment status cannot be created with status:" + paymentStatus);
+    public Rental(DraftRental draftRental) {
+        if(!Objects.equals(draftRental.getPaymentStatus(), PaymentStatus.COMPLETED) &&
+           !Objects.equals(draftRental.getPaymentStatus(), PaymentStatus.REFUNDED)) {
+            throw new IllegalArgumentException("Rental payment status cannot be created with status:" + draftRental.getPaymentStatus());
         }
 
-        this.setFromDate(fromDate);
-        this.setToDate(toDate);
-        this.setClient(client);
-        this.setCar(car);
-        this.setPaymentStatus(paymentStatus);
+        this.setFromDate(draftRental.getFromDate());
+        this.setToDate(draftRental.getToDate());
+        this.setClient(draftRental.getClient());
+        this.setCar(draftRental.getCar());
+        this.setPaymentStatus(draftRental.getPaymentStatus());
     }
 }

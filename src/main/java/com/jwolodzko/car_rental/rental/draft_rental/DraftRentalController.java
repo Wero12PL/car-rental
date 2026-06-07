@@ -31,4 +31,9 @@ public class DraftRentalController {
                 .map(DraftRentalResponse::new)
                 .toList();
     }
+
+    @PostMapping("/{id}/process")
+    public DraftRental processDraftRental(@PathVariable Long id) {
+        return draftRentalService.processDraftRental(id);
+    }
 }
