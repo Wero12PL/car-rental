@@ -41,7 +41,7 @@ public class DraftRentalService {
     }
 
     public void createDraftRental(DraftRentalRequest draftRentalRequest) {
-        Car car = carRepository.findById(draftRentalRequest.carId())
+        Car car = carRepository.findByIdForUpdate(draftRentalRequest.carId())
                 .orElseThrow(() -> new ResourceNotFoundException("Car not found with id: " + draftRentalRequest.carId()));
         Client client = clientRepository.findById(draftRentalRequest.clientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + draftRentalRequest.clientId()));
@@ -64,22 +64,21 @@ public class DraftRentalService {
     }
 
     public DraftRental processDraftRental(Long id) {
-        DraftRental draftRental = draftRentalRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Draft rental not found with id: " + id));
-        //some mock payment status service for demonstrational purposes
+        DraftRental draftRental = draftRentalRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Draft rental not found with id: " + id));
+
+        if (draftRental.getPaymentStatus() != PaymentStatus.NOT_STARTED) {
+            throw new IllegalStateException("Draft rental already processed");
+        }
+
         PaymentStatus paymentStatus = paymentService.processPayment();
         draftRental.setPaymentStatus(paymentStatus);
 
-        //here we could handle all the payment statuses received
-        if(Objects.equals(paymentStatus, PaymentStatus.COMPLETED)) {
+        if (Objects.equals(paymentStatus, PaymentStatus.COMPLETED)) {
             rentalService.createRental(draftRental);
-            //todo: release car from being rented
-            //1. versioning i konflikty
-            //2. completed na draft rental?
         }
 
-        draftRentalRepository.save(draftRental);
-
-        return draftRental;
+        return draftRentalRepository.save(draftRental);
     }
 
     private boolean isCarAvailableAtDate(Car car, LocalDate fromDate, LocalDate toDate) {

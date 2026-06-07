@@ -10,11 +10,12 @@ import lombok.Setter;
 @Setter
 @Table(name = "car")
 public class Car {
-    //with a lot of INSERT requests to DB this might be a bottleneck, as we must wait for DB to assign ID
-    //UUID.randomUUID() might be better with scale
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Version
+    Long version;
 
     @Column(nullable = false)
     String brand;

@@ -33,7 +33,8 @@ public class DraftRentalController {
     }
 
     @PostMapping("/{id}/process")
-    public DraftRental processDraftRental(@PathVariable Long id) {
-        return draftRentalService.processDraftRental(id);
+    public DraftRentalResponse processDraftRental(@PathVariable Long id) {
+        DraftRental draftRental = draftRentalService.processDraftRental(id);
+        return new DraftRentalResponse(draftRental);
     }
 }
